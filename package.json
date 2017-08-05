@@ -1,5 +1,5 @@
 {
-  "name": "fire-rss",
+  "name": "fire-feed",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.3",
+    "feed": "^1.1.0",
     "firebase": "^4.2.0"
   }
 }
