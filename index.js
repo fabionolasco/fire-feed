@@ -11,6 +11,10 @@ const FIRE = FIREBASE.initializeApp(CONFIG.firebaseAccount);
 const REF = {};
 
 // Start Feed Builded
+CONFIG.content.forEach((source) => {
+    CONFIG.feed.feedLinks.rss = CONFIG.feed.id + ':' + CONFIG.port + '/rss';
+    CONFIG.feed.feedLinks.atom = CONFIG.feed.id + ':' + CONFIG.port + '/atom';
+});
 let feed = new FEED(CONFIG.feed)
 
 // Add Posts to Feed

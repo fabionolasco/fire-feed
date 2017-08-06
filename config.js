@@ -1,4 +1,4 @@
-const apiKeyValue = require('./apiKey.js');
+const Personal = require('./personal.js');
 
 module.exports = {
     port: 3322,
@@ -17,7 +17,7 @@ module.exports = {
         }
     ],
     firebaseAccount: {
-        apiKey: apiKeyValue,
+        apiKey: Personal.firebaseApiKey,
         authDomain: 'fabionolasco-91850.firebaseapp.com',
         databaseURL: 'https://fabionolasco-91850.firebaseio.com',
         projectId: 'fabionolasco-91850',
@@ -26,21 +26,18 @@ module.exports = {
     },
     feed: {
         title: 'Fabio Nolasco - Front End Development',
-        description: 'News feed for Fabionolasco.com!',
-        id: 'https://fabionolasco.com/',
+        description: 'News feed from Fabionolasco.com!',
+        id: 'https://fabionolasco.com',
         link: 'https://fabionolasco.com/',
         image: 'https://fabionolasco.com/image.png',
         favicon: 'https://fabionolasco.com/favicon.ico',
-        copyright: 'All rights reserved 2013, John Doe',
+        copyright: 'All rights reserved ' + new Date().getFullYear() + ', Fabio Nolasco',
         updated: new Date(),
-        generator: 'awesome', // optional, default = 'Feed for Node.js' 
-        feedLinks: {
-            json: 'https://fabionolasco.com/json',
-            atom: 'https://fabionolasco.com/atom',
-        },
+        generator: 'https://github.com/fabionolasco/fire-feed',
+        feedLinks: {},
         author: {
             name: 'Fabio Nolasco',
-            email: 'gomidefabio' + '@gm' + 'ail.com',
+            email: Personal.email,
             link: 'https://fabionolasco.com/'
         }
     }
