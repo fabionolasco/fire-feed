@@ -2,8 +2,14 @@ module.exports = {
 
     // Please remove the ".original" from this file before running this script
 
-    firebaseApiKey: '-add-you-firebase-api-key-here',
+    firebaseApiKey: '-add-you-firebase-api-key-here-',
     
-    email: '-add-your-email-here'
+    email: '-add-your-@-email-here'
+
+    // In case you are using SSL:
+
+    cert: '/address/to/the/cert.pem',
+
+    key: '/address/to/the/key.pem'
 
 };

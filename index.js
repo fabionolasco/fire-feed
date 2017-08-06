@@ -1,10 +1,14 @@
 const EXPRESS = require('express');
 const FIREBASE = require('firebase');
 const FEED = require('feed')
-const APP = EXPRESS();
 const FS = require("fs");
 const PATH = require("path");
 const CONFIG = require('./config.js');
+const HTTPS = require('https');
+
+// Start APP
+const APP = EXPRESS();
+APP.use(require('helmet')());
 
 // Start Firebase
 const FIRE = FIREBASE.initializeApp(CONFIG.firebaseAccount);
@@ -15,7 +19,14 @@ CONFIG.content.forEach((source) => {
     CONFIG.feed.feedLinks.rss = CONFIG.feed.id + ':' + CONFIG.port + '/rss';
     CONFIG.feed.feedLinks.atom = CONFIG.feed.id + ':' + CONFIG.port + '/atom';
 });
-let feed = new FEED(CONFIG.feed)
+let feed = new FEED(CONFIG.feed);
+
+// SSL
+const SSLOPTIONS = {};
+if (CONFIG.useSsl) {
+    SSLOPTIONS.cert = FS.readFileSync(CONFIG.useSsl.cert);
+    SSLOPTIONS.key = FS.readFileSync(CONFIG.useSsl.key);
+}
 
 // Add Posts to Feed
 CONFIG.content.forEach((source) => {
@@ -79,4 +90,9 @@ function addPost(post, sourceUrl) {
 }
 
 // Start Listening
-APP.listen(CONFIG.port);
+if (CONFIG.useSsl) {
+    EXPRESS.listen(CONFIG.port - 1);
+    HTTPS.createServer(SSLOPTIONS, APP).listen(CONFIG.port);
+} else {
+    EXPRESS.listen(CONFIG.port);
+}
