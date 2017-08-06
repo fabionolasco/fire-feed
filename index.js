@@ -44,20 +44,20 @@ CONFIG.content.forEach((source) => {
             })
         });
 });
-    
+
 // Build URLs
 APP.get('/', (req, res) => {
     const filename = PATH.join(process.cwd(), 'index.html')
-    FS.readFile(filename, 'binary', function(err, file) {
-      if(err) {        
-        res.writeHead(500, {"Content-Type": "text/plain"});
-        res.write(err + "\n");
+    FS.readFile(filename, 'binary', function (err, file) {
+        if (err) {
+            res.writeHead(500, { "Content-Type": "text/plain" });
+            res.write(err + "\n");
+            res.end();
+            return;
+        }
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.write(file, "binary");
         res.end();
-        return;
-      }
-      res.writeHead(200);
-      res.write(file, "binary");
-      res.end();
     });
 });
 APP.get('/rss', (req, res) => {
@@ -75,7 +75,7 @@ function addPost(post, sourceUrl) {
         title: post.title,
         id: CONFIG.feed.link + sourceUrl + '/' + post.slug,
         link: CONFIG.feed.link + sourceUrl + '/' + post.slug,
-        description: post.description.substring(0,300) + '...',
+        description: post.description.substring(0, 300) + '...',
         content: post.description,
         author: [
             {
@@ -90,9 +90,9 @@ function addPost(post, sourceUrl) {
 }
 
 // Start Listening
+APP.listen(CONFIG.port);
+console.log('Listening on port ' + CONFIG.port);
 if (CONFIG.useSsl) {
-    EXPRESS.listen(CONFIG.port - 1);
-    HTTPS.createServer(SSLOPTIONS, APP).listen(CONFIG.port);
-} else {
-    EXPRESS.listen(CONFIG.port);
+    HTTPS.createServer(SSLOPTIONS, APP).listen(3323);
+    console.log('Listening SLL on port ' + Math.floor(3323));
 }
