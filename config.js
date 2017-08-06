@@ -2,9 +2,10 @@ const Personal = require('./personal.js');
 
 module.exports = {
     port: 3322,
-    useSsl: { // false || object{cert, key}
+    useSsl: { // false || object{cert, key, port}
         cert: Personal.cert,
-        key: Personal.key
+        key: Personal.key,
+        port: 3323
     }, 
     content: [
         // The posts of these elements will be combined into one feed

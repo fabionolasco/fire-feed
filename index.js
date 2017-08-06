@@ -93,6 +93,6 @@ function addPost(post, sourceUrl) {
 APP.listen(CONFIG.port);
 console.log('Listening on port ' + CONFIG.port);
 if (CONFIG.useSsl) {
-    HTTPS.createServer(SSLOPTIONS, APP).listen(3323);
-    console.log('Listening SLL on port ' + Math.floor(3323));
+    HTTPS.createServer(SSLOPTIONS, APP).listen(CONFIG.useSsl.port);
+    console.log('Listening SLL on port ' + CONFIG.useSsl.port);
 }
