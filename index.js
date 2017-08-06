@@ -69,7 +69,7 @@ function addPost(post, sourceUrl) {
                 link: CONFIG.feed.author.link
             }
         ],
-        date: new Date(),
+        date: new Date(post.pubDate),
         image: post.url + post.imageName
     })
 }

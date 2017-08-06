@@ -3,6 +3,8 @@ const apiKeyValue = require('./apiKey.js');
 module.exports = {
     port: 3322,
     content: [
+        // The posts of these elements will be combined into one feed
+        // For multiple feeds (for now) pelase instanciate multiple version of this script
         {
             url: 'blog',
             firebaseSource: 'blog/posts',
@@ -23,14 +25,14 @@ module.exports = {
         messagingSenderId: '471822727829'
     },
     feed: {
-        title: 'Fabio Nolasco - Front End',
-        description: 'This is my personal feed!',
+        title: 'Fabio Nolasco - Front End Development',
+        description: 'News feed for Fabionolasco.com!',
         id: 'https://fabionolasco.com/',
         link: 'https://fabionolasco.com/',
         image: 'https://fabionolasco.com/image.png',
         favicon: 'https://fabionolasco.com/favicon.ico',
         copyright: 'All rights reserved 2013, John Doe',
-        updated: new Date(2013, 06, 14), // optional, default = today 
+        updated: new Date(),
         generator: 'awesome', // optional, default = 'Feed for Node.js' 
         feedLinks: {
             json: 'https://fabionolasco.com/json',
