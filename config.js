@@ -30,7 +30,7 @@ module.exports = {
         messagingSenderId: '471822727829'
     },
     feed: {
-        title: 'Fabio Nolasco - Front End Development',
+        title: 'Fabio Nolasco - Frontend Development',
         description: 'News feed from Fabionolasco.com!',
         id: 'https://fabionolasco.com',
         link: 'https://fabionolasco.com/',

@@ -71,7 +71,7 @@ APP.get('/atom', (req, res) => {
 
 // Add Posts to Feed Plugin
 function addPost(post, sourceUrl) {
-    feed.addItem({
+    postItem = {
         title: post.title,
         id: CONFIG.feed.link + sourceUrl + '/' + post.slug,
         link: CONFIG.feed.link + sourceUrl + '/' + post.slug,
@@ -85,8 +85,13 @@ function addPost(post, sourceUrl) {
             }
         ],
         date: new Date(post.pubDate),
-        image: post.url + post.imageName
-    })
+        image: CONFIG.feed.link + post.imageName
+    };
+    // If image is using resolution control, bring it to 1x
+    if (postItem.image.indexOf('@0x') > -1) {
+        postItem.image = postItem.image.replace('@0x', '@1x');
+    }
+    feed.addItem(postItem);
 }
 
 // Start Listening
