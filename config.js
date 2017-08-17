@@ -30,11 +30,13 @@ module.exports = {
         messagingSenderId: '471822727829'
     },
     feed: {
-        title: 'Fabio Nolasco - Frontend Development',
-        description: 'News feed from Fabionolasco.com!',
+        ttl: 60,
+        language: 'en-US',
+        title: 'Fabio Nolasco - Front-end Development',
+        description: 'Articles, Resources and Tips on Front-End Development',
         id: 'https://fabionolasco.com',
         link: 'https://fabionolasco.com/',
-        image: 'https://fabionolasco.com/image.png',
+        image: 'https://fabionolasco.com/logo-256.png',
         favicon: 'https://fabionolasco.com/favicon.ico',
         copyright: 'All rights reserved ' + new Date().getFullYear() + ', Fabio Nolasco',
         updated: new Date(),
@@ -42,7 +44,6 @@ module.exports = {
         feedLinks: {},
         author: {
             name: 'Fabio Nolasco',
-            email: Personal.email,
             link: 'https://fabionolasco.com/'
         }
     }

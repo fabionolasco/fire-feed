@@ -1,10 +1,11 @@
 const EXPRESS = require('express');
 const FIREBASE = require('firebase');
-const FEED = require('feed')
+const FEED = require('./feed.js')
 const FS = require("fs");
 const PATH = require("path");
 const CONFIG = require('./config.js');
 const HTTPS = require('https');
+const isSsl = process.env.ssl || false
 
 // Start APP
 const APP = EXPRESS();
@@ -23,7 +24,7 @@ let feed = new FEED(CONFIG.feed);
 
 // SSL
 const SSLOPTIONS = {};
-if (CONFIG.useSsl) {
+if (isSsl && CONFIG.useSsl) {
     SSLOPTIONS.cert = FS.readFileSync(CONFIG.useSsl.cert);
     SSLOPTIONS.key = FS.readFileSync(CONFIG.useSsl.key);
 }
@@ -74,13 +75,14 @@ function addPost(post, sourceUrl) {
     postItem = {
         title: post.title,
         id: CONFIG.feed.link + sourceUrl + '/' + post.slug,
+        guid: post.guid + post.slug,
         link: CONFIG.feed.link + sourceUrl + '/' + post.slug,
         description: post.description.substring(0, 300) + '...',
-        content: post.description,
+        content: post.content,
+        categories: post.keywords.split(','),
         author: [
             {
                 name: CONFIG.feed.author.name,
-                email: CONFIG.feed.author.email,
                 link: CONFIG.feed.author.link
             }
         ],
@@ -97,7 +99,7 @@ function addPost(post, sourceUrl) {
 // Start Listening
 APP.listen(CONFIG.port);
 console.log('Listening on port ' + CONFIG.port);
-if (CONFIG.useSsl) {
+if (isSsl && CONFIG.useSsl) {
     HTTPS.createServer(SSLOPTIONS, APP).listen(CONFIG.useSsl.port);
     console.log('Listening SLL on port ' + CONFIG.useSsl.port);
 }
