@@ -17,8 +17,8 @@ const REF = {};
 
 // Start Feed Builded
 CONFIG.content.forEach((source) => {
-    CONFIG.feed.feedLinks.rss = CONFIG.feed.id + ':' + CONFIG.port + '/rss';
-    CONFIG.feed.feedLinks.atom = CONFIG.feed.id + ':' + CONFIG.port + '/atom';
+    CONFIG.feed.feedLinks.rss = CONFIG.feed.rssBase;
+    CONFIG.feed.feedLinks.atom = CONFIG.feed.atomBase;
 });
 let feed = new FEED(CONFIG.feed);
 
@@ -87,7 +87,7 @@ function addPost(post, sourceUrl) {
             }
         ],
         date: new Date(post.pubDate),
-        image: CONFIG.feed.link + post.imageName
+        image: CONFIG.feed.imageBase + post.imageName
     };
     // If image is using resolution control, bring it to 1x
     if (postItem.image.indexOf('@0x') > -1) {
